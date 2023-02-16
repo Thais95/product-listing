@@ -1,7 +1,16 @@
-import React from 'react'
+import { MainContainer } from '../components/Container';
+import { Header } from '../components/Heading';
 
 export const Homepage = () => {
   return (
-    <div>Homepage</div>
+    <MainContainer>
+      
+      <Header
+        title='Produtos de Higiene Pessoal'
+        subtitle='120 produtos'
+      />
+
+
+    </MainContainer >
   )
 }
