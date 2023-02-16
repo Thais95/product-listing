@@ -1,16 +1,19 @@
-import { MainContainer } from '../components/Container';
+import { Box } from '@mui/material';
 import { Header } from '../components/Heading';
+import { Menu } from '../components/Menu';
 
 export const Homepage = () => {
   return (
-    <MainContainer>
-      
+    <Menu>
       <Header
         title='Produtos de Higiene Pessoal'
-        subtitle='120 produtos'
+        subtitle='120 itens encontrados'
       />
 
-
-    </MainContainer >
+      <Box sx={{
+        width: "100%", display: "flex", justifyContent: "space-between"
+      }}>
+      </Box>
+    </Menu >
   )
 }

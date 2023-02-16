@@ -5,3 +5,11 @@
   text-decoration: none;
   list-style: none;
 }
+
+:root {
+  --cor-de-fundo: #F6F5F5;
+  --cor-de-texto: #252525;
+  --cor-primaria: #4b595d;
+  --cor-secundaria: #005B94;
+  --cor-destaque: #07c4e6;
+}
