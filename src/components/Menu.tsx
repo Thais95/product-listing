@@ -8,7 +8,7 @@ import { IChildren } from "../utils/interfaces";
 import products from "../json/products.json";
 import { useDebounce } from "../utils/useDebounce";
 
-const drawerWidth = 340;
+const drawerWidth = 300;
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -45,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     borderRadius: "6px",
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    width: '20ch',
+    width: '17ch',
     transition: "0.5s",
     '&:hover': {
       backgroundColor: "white",
