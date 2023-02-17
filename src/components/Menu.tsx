@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, CssBaseline, AppBar, Drawer, List, ListItem, ListItemText, IconButton, Checkbox, FormControlLabel, FormGroup, alpha, InputBase, styled, Divider } from "@mui/material";
+import { Box, CssBaseline, AppBar, Drawer, List, IconButton, Checkbox, FormControlLabel, FormGroup, alpha, InputBase, styled, Divider } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { IChildren } from "../utils/interfaces";
 import products from "../json/products.json";
+import { useDebounce } from "../utils/useDebounce";
 
 const drawerWidth = 340;
 
@@ -24,31 +25,40 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(2, 2),
   height: '100%',
   position: 'absolute',
   pointerEvents: 'none',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  zIndex: "2",
+  color: "var(--cor-de-texto)"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    border: "2px solid #efefef",
+    position: "absolute",
+    backgroundColor: "whitesmoke",
+    border: "1px solid #efefef",
     borderRadius: "6px",
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: "1s",
-    width: '100%',
+    width: '20ch',
+    transition: "0.5s",
+    '&:hover': {
+      backgroundColor: "white",
+      borderColor: "lightgray",
+      boxShadow: "0px 0px 0px 5px rgb(7, 196, 230, 0.2)",
+      transition: "0.5s",
+    },
     '&:focus': {
-      border: "2px solid var(--cor-destaque)",
-      transition: "1s"
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
+      backgroundColor: "white",
+      borderColor: "lightgray",
+      boxShadow: "0px 0px 0px 5px rgb(7, 196, 230, 0.2)",
+      transition: "0.5s",
+    }
   },
 }));
 
@@ -60,8 +70,16 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-export const Menu: React.FC<IChildren> = ({ children }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+interface IMenu extends IChildren {
+  searchInput: (query: string) => void;
+  onChangeFilter: (filterValue: string) => void;
+}
+
+export const Menu: React.FC<IMenu> = ({ children, searchInput, onChangeFilter }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [query, setQuery] = useState<string>('');
+
+  const debounceQuery = useDebounce(query);
   const productCategories = products.data.nodes.map((product) => product.category.name);
   const uniqueCategories = Array.from(new Set(productCategories));
 
@@ -69,30 +87,32 @@ export const Menu: React.FC<IChildren> = ({ children }) => {
     setMobileOpen(!mobileOpen);
   }
 
+  useEffect(() => {
+    searchInput(debounceQuery);
+  }, [debounceQuery])
+
   const drawer = (
     <div>
       <List sx={{
-        width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", gap: "12px", padding: { lg: "40px 0px", xl: "0" }
+        width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", gap: "12px", padding: "40px 0px"
       }}>
         <Root>
-          <Divider textAlign="left" sx={{ userSelect: "none", fontWeight: 600, color: "var(--cor-de-texto)" }}>
+          <Divider textAlign="left" sx={{ userSelect: "none", fontWeight: 600, color: "var(--cor-primaria)", fontFamily: "'Source Sans Pro', sans-serif;" }}>
             Pesquisa
           </Divider>
         </Root>
-        <Search sx={{ marginBottom: "40px", paddingLeft: "38px" }}>
+        <Search sx={{ marginBottom: "40px", marginTop: "10px", paddingLeft: "38px" }}>
           <SearchIconWrapper>
-            <SearchIcon
-              sx={{
-                fill: "var(--cor-de-texto)"
-              }} />
+            <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
             placeholder="Digite aqui..."
             inputProps={{ 'aria-label': 'search' }}
+            onChange={(event) => setQuery(event.target.value)}
           />
         </Search>
         <Root>
-          <Divider textAlign="left" sx={{ userSelect: "none", fontWeight: 600, color: "var(--cor-de-texto)" }}>
+          <Divider textAlign="left" sx={{ userSelect: "none", fontWeight: 600, color: "var(--cor-primaria)", fontFamily: "'Source Sans Pro', sans-serif;" }}>
             Filtros
           </Divider>
         </Root>
@@ -107,12 +127,13 @@ export const Menu: React.FC<IChildren> = ({ children }) => {
                     '&.Mui-checked': {
                       color: "var(--cor-destaque)",
                       transition: "0.5s",
-                      transform: "scale(1.2)"
+                      transform: "scale(1.3)"
                     }
                   }}
                 />
               }
               label={product}
+              onChange={() => onChangeFilter(product)}
               sx={{
                 userSelect: "none",
                 color: "var(--cor-primaria)"
@@ -137,13 +158,12 @@ export const Menu: React.FC<IChildren> = ({ children }) => {
         }}
       >
         <IconButton
-          color="primary"
           aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ position: "fixed", left: 20, top: 6, display: { md: 'none' } }}
+          sx={{ position: "fixed", left: 20, top: 6, display: { md: 'none' }, color: "var(--cor-destaque)" }}
         >
-          <MenuIcon fontSize="large" />
+          <MenuIcon sx={{ fontSize: "2.8rem" }} />
         </IconButton>
       </AppBar>
       <Box

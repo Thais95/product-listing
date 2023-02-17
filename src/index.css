@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -12,4 +14,25 @@
   --cor-primaria: #4b595d;
   --cor-secundaria: #005B94;
   --cor-destaque: #07c4e6;
+}
+
+body {
+  background-color: #F6F5F5;
+  font-family: 'Inter', sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0e0e0e;
+  border: 5px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #F6F5F5;
 }
