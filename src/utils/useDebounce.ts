@@ -6,7 +6,7 @@ export const useDebounce = (value: string) => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
-    }, 200);
+    }, 400);
 
     return () => {
       clearTimeout(handler);

@@ -94,8 +94,11 @@ export const Menu: React.FC<IMenu> = ({ children, searchInput, onChangeFilter })
   const drawer = (
     <div>
       <List sx={{
-        width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", gap: "12px", padding: "40px 0px"
+        width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-end", gap: "10px", padding: "40px 0px"
       }}>
+        <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", height: "200px" }}>
+          <img src="https://www.svgrepo.com/show/425689/grocery-store-hygiene.svg" alt="logo" style={{ width: "100px", height: "100px" }} />
+        </div>
         <Root>
           <Divider textAlign="left" sx={{ userSelect: "none", fontWeight: 600, color: "var(--cor-primaria)", fontFamily: "'Source Sans Pro', sans-serif;" }}>
             Pesquisa

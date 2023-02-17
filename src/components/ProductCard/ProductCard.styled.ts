@@ -10,12 +10,12 @@ export const Card = styled.div`
     border-radius: 6px;
     border: 1px solid transparent;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
-    transition: 0.5s;
+    transition: 1s;
     overflow: hidden;
     &:hover {
-        transform: scale(1.01);
+        transform: translateY(-5px);
         background-color: #e3e3e3;
-        transition: 0.5s;
+        transition: 1s;
         box-shadow: 0px 15px 15px rgb(0, 91, 148, 0.15);
         border-color: #c4c4c4;
     }
@@ -40,21 +40,14 @@ export const Cover = styled.div`
 export const Title = styled.h2`
     font-size: 1rem;
     color: var(--cor-de-texto);
-    line-height: 1.75rem;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     padding: 10px 4px;
     cursor: default;
 `
-
-export const Subtitle = styled.p`
-    font-weight: 600;
-    color: var(--cor-de-texto);
-    font-size: 0.8rem;
-`
-
 export const More = styled.span`
+    font-family: 'Source Sans Pro', sans-serif;
     background-color: #1c1c1c;
     color: white;
     display: flex;
@@ -70,12 +63,74 @@ export const More = styled.span`
     bottom: 0;
     left: 0;
     right: 0;
-    transition: 0.5s;
+    transition: 0.2s;
     border: 1px solid black;
     cursor: pointer;
     &:hover {
-        transition: 0.5s;
-        font-size: 0.95rem;
+        transition: 0.2s;
         color: var(--cor-destaque);
+        background-color: #101010;
     }
+`
+
+export const ModalContent = styled.div`
+    position: "absolute";
+    margin: 0 auto;
+    background-color: white;
+    width: 300px;
+    height: auto;
+    border: "none";
+    border-radius: "5px";
+    text-align: "center";
+    box-shadow: 20;
+    display: "flex";
+    flex-direction: row;
+    justify-content: "center";
+    align-items: "center";
+    &:hover {
+        border: "none"
+    };
+    &:active {
+        border: "none"
+    };
+    img {
+        border: "none";
+        width: "100px";
+        object-fit: cover;
+        &:hover {
+            border: "none";
+        };
+        &:active {
+            border: "none";
+        }
+    }
+`
+
+export const ModalImage = styled.img`
+    margin-left: -60px;
+    width: 200px;
+    height: 400px;
+    object-fit: cover;
+`
+
+export const ModalText = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 240px;
+`
+
+export const ModalTitle = styled.h1`
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: left;
+    font-size: 2.2rem;
+    color: var(--cor-destaque);
+    margin-bottom: 20px;
+    cursor: default;
+`
+export const Subtitle = styled.h4`
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: left;
+    font-size: 1.3rem;
+    color: var(--cor-de-texto);
+    cursor: default;
 `
